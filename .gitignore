@@ -1,0 +1,51 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+env/
+venv/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Output files
+output.json
+*.csv
+*.xlsx
+
+# LanguageTool files
+*.languagetool
+
+# Logs e temporanei
+*.log
+*.tmp
+*.swp
+
+# IDE/project-specific
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyd
+*.so
+*.dll

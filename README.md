@@ -54,7 +54,7 @@ setx OPENAI_API_KEY "your_api_key"
 }
 ```
 
-## Execution -  OpenAI API
+## Execution - OpenAI API
 From the terminal, run:
 ```bash
 python prompt_smell_analyzer_final.py --input input.json --output output.json
@@ -162,5 +162,6 @@ The output JSON also includes `token counts` and a `too_long` flag:
 - **BDS**: Bias Detection Score
 - **token_count**: number of tokens in the prompt (ONLY IN FREE VERSION)
 - **too_long**: `true` if the prompt exceeds GPT-Neo limits (ONLY IN FREE VERSION)
+
 
 

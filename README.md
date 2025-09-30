@@ -4,6 +4,23 @@ This project analyzes text prompts to detect **common issues** such as grammatic
 
 The script takes a JSON file containing prompts as input and outputs a JSON file with the calculated metrics.
 
+
+---
+
+## Table of Contents
+
+- [Requirements](#requirements)
+- [Configuration](#configuration)
+  - [Set OpenAI API Key](#set-openai-api-key)
+  - [Prepare Input JSON](#prepare-input-json)
+- [Execution](#execution)
+  - [Using GPT-4 / GPT-4 Turbo (Paid)](#using-gpt-4--gpt-4-turbo-paid)
+  - [Using Free Offline Version with GPT-Neo (No API Key)](#using-free-offline-version-with-gpt-neo-no-api-key)
+- [Output](#output)
+  - [Metrics Explained](#metrics-explained)
+  - [Example Output](#example-output)
+- [Notes](#notes)
+
 ---
 
 ## Requisiti
@@ -78,6 +95,8 @@ The output JSON file will contain the following metrics for each prompt:
 - Scores are normalized between 0 and 1, where higher values indicate higher quality or stronger presence of bias/formality depending on the metric.
 - Input prompts can be either plain strings or objects with the key "prompt".
 
+---
+
 # Free Offline Version with GPT-Neo (no API key)
 
 For users who do not want to use the OpenAI API, you can use GPT-Neo 125M offline with the script `analyzer_free.py`.
@@ -132,3 +151,4 @@ The output JSON also includes `token counts` and a `too_long` flag:
 - **BDS**: Bias Detection Score
 - **token_count**: number of tokens in the prompt (ONLY IN FREE VERSION)
 - **too_long**: `true` if the prompt exceeds GPT-Neo limits (ONLY IN FREE VERSION)
+

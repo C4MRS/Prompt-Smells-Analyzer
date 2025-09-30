@@ -9,21 +9,22 @@ The script takes a JSON file containing prompts as input and outputs a JSON file
 
 ## Table of Contents
 
-- [Requirements](#requirements)
-- [Configuration](#configuration)
-  - [Set OpenAI API Key](#set-openai-api-key)
-  - [Prepare Input JSON](#prepare-input-json)
-- [Execution](#execution)
-  - [Using GPT-4 / GPT-4 Turbo (Paid)](#using-gpt-4--gpt-4-turbo-paid)
-  - [Using Free Offline Version with GPT-Neo (No API Key)](#using-free-offline-version-with-gpt-neo-no-api-key)
-- [Output](#output)
-  - [Metrics Explained](#metrics-explained)
-  - [Example Output](#example-output)
-- [Notes](#notes)
+- [Using OpenAI API (Paid)](#requirements---openai-api)
+  - [Configuration](#configuration---openai-api)
+  - [Execution](#execution---openai-api)
+  - [Output](#output---openai-api)
+  - [Notes](#notes---openai-api)
+- [Using Free Offline Version with GPT-Neo (No API Key)](#requirements---gpt-neo-free-version)
+  - [How it works](#how-it-works)
+  - [Configuration](#configuration---gpt-neo-free-version)
+  - [Execution](#execution---gpt-neo-free-version)
+  - [Output](#output---gpt-neo-free-version)
+  - [Notes](#notes---gpt-neo-free-version)
+- [Output Metrics](#output-metrics)
 
 ---
 
-## Requisiti
+## Requirements - OpenAI API
 
 - Python 3.8+
 - OpenAI API Key
@@ -33,7 +34,7 @@ The script takes a JSON file containing prompts as input and outputs a JSON file
 pip install pandas textstat language-tool-python openai tqdm
 ```
 
-## Configuration
+## Configuration - OpenAI API
 1. Set your OpenAI API Key as an environment variable::
 - Linux/macOS
 ```bash
@@ -53,7 +54,7 @@ setx OPENAI_API_KEY "your_api_key"
 }
 ```
 
-## Execution
+## Execution -  OpenAI API
 From the terminal, run:
 ```bash
 python prompt_smell_analyzer_final.py --input input.json --output output.json
@@ -61,7 +62,7 @@ python prompt_smell_analyzer_final.py --input input.json --output output.json
 - **--input**: path to the JSON file containing the prompts to analyze.
 - **--output**: path to the output JSON file (default: output.json).
 
-## Output
+## Output - OpenAI API
 The output JSON file will contain the following metrics for each prompt:
 
 - PQS: Prompt Quality Score (average of grammar, formatting, and clarity)
@@ -90,7 +91,7 @@ The output JSON file will contain the following metrics for each prompt:
 ]
 ```
 
-## Notes
+## Notes - OpenAI API
 - The analysis of RCS, FMS, and BDS requires an internet connection and a valid OpenAI API Key.
 - Scores are normalized between 0 and 1, where higher values indicate higher quality or stronger presence of bias/formality depending on the metric.
 - Input prompts can be either plain strings or objects with the key "prompt".
@@ -101,19 +102,29 @@ The output JSON file will contain the following metrics for each prompt:
 
 For users who do not want to use the OpenAI API, you can use GPT-Neo 125M offline with the script `analyzer_free.py`.
 
+## Requirements - GPT-Neo Free Version
+- Python 3.8+
+- GPU recommended (CUDA) but CPU works too
+- Python dependencies:
+
 ## How it works
 
 - GPT-Neo generates `Yes/No` answers for some metrics (RCS, FMS, BDS).
 - Prompts longer than GPT-Neo's token limit (2048 tokens) will return `NaN` for model-based metrics.
 
-## Execution
+## Configuration - GPT-Neo Free Version
+```bash
+pip install torch transformers textstat language-tool-python tqdm
+```
+
+## Execution - GPT-Neo Free Version
 ```bash
 python analyzer_free.py --input input.json --output output.json
 ```
 - **--input**: JSON file with prompts.
 - **--output**: JSON file containing calculated metrics and token counts.
 
-## Output
+## Output - GPT-Neo Free Version
 
 The output JSON also includes `token counts` and a `too_long` flag:
 ```json
@@ -133,7 +144,7 @@ The output JSON also includes `token counts` and a `too_long` flag:
   }
 ]
 ```
-## Notes
+## Notes - GPT-Neo Free Version
 
 - RCS, FMS, and BDS are calculated using GPT-Neo in Yes/No mode, so they may return NaN if the prompt exceeds token limits.
 - This version does not require an internet connection, unlike the OpenAI version.
@@ -151,4 +162,5 @@ The output JSON also includes `token counts` and a `too_long` flag:
 - **BDS**: Bias Detection Score
 - **token_count**: number of tokens in the prompt (ONLY IN FREE VERSION)
 - **too_long**: `true` if the prompt exceeds GPT-Neo limits (ONLY IN FREE VERSION)
+
 
